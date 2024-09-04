@@ -13,8 +13,8 @@ Each line of metadata is a json object, which contains the following fields:
 - `type`: string, the type of the code to be generated. `method` means the code is a member function in a class, and `function` means the code is a individual function.
 - `project_path`: string, the path of the project, e.g., `Text Processing/python-benedict`.
 - `completion_path`: string, the path of the file where the code to be generated is located, e.g., `Text Processing/python-benedict/benedict/utils/type_util.py`.
-- `signature_position`: list, the start and end line number of the signature within completion files e.g., `[238, 238]`. The line number starts from 0.
-- `body_position`: list, the start and end line number of the reference code within completion files e.g., `[239, 254]`. The line number starts from 0.
+- `signature_position`: list, the start and end line number of the signature within completion files e.g., `[238, 238]`. The line number starts from 1.
+- `body_position`: list, the start and end line number of the reference code within completion files e.g., `[239, 254]`. The line number starts from 1.
 - `dependency`: dict, the reference dependency. The keys include `intra_class`, `intra_file`, and `cross_file`. Each key stores a list of strings, which are namespaces of reference dependencies.
 - `indent`: int, the indent of the code to be generated.
 - `tests`: list, a list of test functions, which are used to evaluate the generated code.
