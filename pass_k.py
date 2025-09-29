@@ -33,7 +33,23 @@ def adjust_indent(code, new_indent):
 @func_set_timeout(60)
 def execution_tests(args, data):
     project_path = os.path.join(args.source_code_root, data['project_path'])
-    command = ['python', 'setup.py', 'pytest', '--addopts']
+
+    setup_path = os.path.join(project_path, "setup.py")
+    if os.path.isfile(setup_path):
+        print(f"Running setup.py in {project_path}...")
+        result = subprocess.run(
+            ["python", "setup.py", "install"],  
+            cwd=project_path,
+            capture_output=True,
+            text=True
+        )
+        # print("stdout:\n", result.stdout)
+        if result.returncode != 0:
+            print("stderr:\n", result.stderr)
+            print("setup.py failed!")
+
+    command = ['pytest']
+    # command = ['python', 'setup.py', 'pytest', '--addopts']
     for test in data['tests']:
         process = subprocess.Popen(command + [test], cwd=project_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         try:
@@ -49,7 +65,7 @@ def execution_tests(args, data):
                     if return_code != 0:
                         process.terminate()
                         process.wait()
-                        return 'Error' # Execution Error
+                        return 'Error'
                     else:
                         break
         except Exception as e:
