@@ -2,6 +2,10 @@
 
 DevEval is a code generation benchmark collected through a rigorous pipeline. DevEval contains 1,825 testing samples, collected from 115 real-world code repositories and covering 10 programming topics. Compared to existing benchmarks, DevEval aligns to real-world repositories in multiple dimensions, e.g., code and dependency distributions. More details about DevEval can be found in our paper [link](https://arxiv.org/abs/2405.19856).
 
+## News
+
+[Nov 12, 2026] We release the docker image of DevEval. Thanks to Xutian Li for his contribution.
+
 ## Metadata
 The metadata of DevEval is stored in `data.tar.gz`. Users can uncompress the file to get the metadata - `data.jsonl`. 
 ```Bash
@@ -37,7 +41,9 @@ The dependency data of repositories is used to evaluate the recall of reference 
 ## Evaluation
 
 ### Environment Setup
-Create a virtual conda environment and install the required packages.
+We provide the docker image of DevEval. Users can use the docker image to run the evaluation. The link of the docker image is [link](https://huggingface.co/datasets/Shooter492/deveval-evocodebench-docker).
+
+<!-- Create a virtual conda environment and install the required packages.
 ```bash
 conda create --name DevEval --file environment.txt
 conda activate DevEval
@@ -47,7 +53,7 @@ echo "export NLTK_DATA=/home/user/DevEval/nltk_data" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Users can execute `python pass_k.py` to check whether the environment is normal. This command executes test cases on ground-truths and stores failed samples in `failed_samples.jsonl`.
+Users can execute `python pass_k.py` to check whether the environment is normal. This command executes test cases on ground-truths and stores failed samples in `failed_samples.jsonl`. -->
 
 ### Completion Format
 User need to convert models' predictions into a jsonl file. Each line of the jsonl file is a json object storing a completion for a requirement. An example of a json object is shown below.
